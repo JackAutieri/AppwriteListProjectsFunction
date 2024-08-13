@@ -1,0 +1,21 @@
+const sdk = require("node-appwrite");
+require('dotenv').config(); // Load environment variables
+
+module.exports = async function (req, res) {
+    const client = new sdk.Client();
+
+    client
+        .setEndpoint(process.env.APPWRITE_FUNCTION_ENDPOINT) // Use endpoint from .env
+        .setKey(process.env.APPWRITE_FUNCTION_API_KEY) // Use API key from .env
+        .setProject(req.variables['APPWRITE_PROJECT_ID']); // Use project ID from request
+
+    try {
+        const databases = new sdk.Databases(client);
+        const response = await databases.list();
+
+        res.json({ databases: response.databases });
+    } catch (error) {
+        console.error("Error retrieving databases:", error);
+        res.status(500).send('Failed to retrieve databases');
+    }
+};
