@@ -1,0 +1,12 @@
+{
+    "name": "list-databases-function",
+    "version": "1.0.0",
+    "description": "Function to list databases",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "node-appwrite": "^10.0.1"
+    }
+}
